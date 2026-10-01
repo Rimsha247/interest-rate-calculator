@@ -2,17 +2,28 @@ require('./style.css');
 const { calculate } = require('./calculator');
 
 function compute() {
-  const principal = document.getElementById('principal').value;
-  const rate = document.getElementById('rate').value;
-  const years = document.getElementById('years').value;
+  const principalInput = document.getElementById('principal');
+  const rateInput = document.getElementById('rate');
+  const yearsInput = document.getElementById('years');
   const result = document.getElementById('result');
+
+  // Prevent TypeErrors: stop if any element is missing from the page
+  if (!principalInput || !rateInput || !yearsInput || !result) {
+    console.error('Calculator elements are missing from the page.');
+    return;
+  }
+
+  // Input values are strings, so convert them to numbers
+  const principal = parseFloat(principalInput.value);
+  const rate = parseFloat(rateInput.value);
+  const years = parseInt(yearsInput.value, 10);
 
   try {
     const interest = calculate(principal, rate, years);
-    const year = new Date().getFullYear() + Number(years);
+    const year = new Date().getFullYear() + years;
     result.textContent =
-      'If you deposit ' + Number(principal).toFixed(2) + ', at an interest rate of ' +
-      Number(rate) + '%, you will receive an amount of ' + interest.toFixed(2) +
+      'If you deposit ' + principal.toFixed(2) + ', at an interest rate of ' +
+      rate + '%, you will receive an amount of ' + interest.toFixed(2) +
       ', in the year ' + year + '.';
     result.classList.remove('error');
   } catch (err) {
@@ -22,12 +33,23 @@ function compute() {
 }
 
 function updateRateLabel() {
-  document.getElementById('rate-value').textContent =
-    Number(document.getElementById('rate').value).toFixed(2) + '%';
+  const rateInput = document.getElementById('rate');
+  const label = document.getElementById('rate-value');
+  if (!rateInput || !label) {
+    return;
+  }
+  label.textContent = parseFloat(rateInput.value).toFixed(2) + '%';
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('rate').addEventListener('input', updateRateLabel);
-  document.getElementById('compute').addEventListener('click', compute);
+  const rateInput = document.getElementById('rate');
+  const button = document.getElementById('compute');
+
+  if (rateInput) {
+    rateInput.addEventListener('input', updateRateLabel);
+  }
+  if (button) {
+    button.addEventListener('click', compute);
+  }
   updateRateLabel();
 });
