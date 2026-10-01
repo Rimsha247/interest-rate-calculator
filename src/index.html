@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interest Rate Calculator - Calculate Simple Interest Online</title>
+  <meta name="description" content="Free online interest rate calculator. Enter an amount, an interest rate and a number of years to see how much interest you will earn.">
+  <meta name="keywords" content="interest rate calculator, simple interest, savings calculator, deposit calculator">
+  <meta name="author" content="Interest Rate Calculator">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://example.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Interest Rate Calculator">
+  <meta property="og:description" content="Calculate the simple interest on a deposit for any rate and number of years.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Interest Rate Calculator">
+  <meta name="twitter:description" content="Calculate the simple interest on a deposit for any rate and number of years.">
+</head>
+<body>
+  <main>
+    <h1>Interest Rate Calculator</h1>
+    <label for="principal">Amount</label>
+    <input type="number" id="principal" min="1" value="1000">
+
+    <label for="rate">Interest Rate</label>
+    <input type="range" id="rate" min="0" max="20" step="0.25" value="10.25">
+    <span id="rate-value"></span>
+
+    <label for="years">Number of Years</label>
+    <input type="number" id="years" min="1" value="5">
+
+    <button id="compute" type="button">Compute Interest</button>
+    <p id="result" aria-live="polite"></p>
+  </main>
+</body>
+</html>
